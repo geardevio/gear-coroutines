@@ -1,0 +1,16 @@
+{
+  "name": "geardev/coroutines",
+  "description": "Coroutines. Part of toolkit to boost your development with Laravel and geardev.io",
+  "autoload": {
+    "psr-4": {
+      "GearDev\\Coroutines\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "GearDev\\Coroutines\\GearCoroutinesServiceProvider"
+      ]
+    }
+  }
+}
