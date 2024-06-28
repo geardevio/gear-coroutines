@@ -8,4 +8,6 @@ interface CoManagerInterface
 
     public static function getInstance(): self;
 
+    public static function getCoroutineCount(): int;
+
 }
