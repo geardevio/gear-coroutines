@@ -5,12 +5,5 @@
     "psr-4": {
       "GearDev\\Coroutines\\": "src/"
     }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "GearDev\\Coroutines\\GearCoroutinesServiceProvider"
-      ]
-    }
   }
 }

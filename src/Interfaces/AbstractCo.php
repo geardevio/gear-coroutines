@@ -11,10 +11,6 @@ abstract class AbstractCo
     protected array $args = [];
     protected int $delaySeconds = 0;
     protected \Closure $function;
-    /**
-     * @var true
-     */
-    protected bool $needCloneDiContainer = false;
 
     /**
      * @var true
@@ -63,7 +59,6 @@ abstract class AbstractCo
             'function' => $this->function,
             'args' => $this->args,
             'delaySeconds' => $this->delaySeconds,
-            'needCloneDiContainer' => $this->needCloneDiContainer,
             'sync' => $this->sync
         ];
     }
@@ -72,15 +67,6 @@ abstract class AbstractCo
         if (static::$fake) {
             $this->addToFakeCoroutines();
         } else {
-            $this->runCoroutine(sync: $this->sync);
-        }
-    }
-
-    public function runWithClonedDiContainer() {
-        if (static::$fake) {
-            $this->addToFakeCoroutines();
-        } else {
-            $this->needCloneDiContainer = true;
             $this->runCoroutine(sync: $this->sync);
         }
     }

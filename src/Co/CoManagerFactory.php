@@ -8,17 +8,9 @@ class CoManagerFactory
 {
     public static function getCoroutineManager(): CoManagerInterface
     {
-        $extensionName = config('gear.coroutines.extension', 'swow');
-        if ($extensionName === 'swow') {
-            if (!extension_loaded('swow')) {
-                throw new \Exception('Extension "swow" not loaded');
-            }
-            if (class_exists(\GearDev\Swow\CoManager\SwowCoManager::class)) {
-                return \GearDev\Swow\CoManager\SwowCoManager::getInstance();
-            } else {
-                throw new \Exception('Class GearDev\Swow\CoManager\SwowCoManager not found');
-            }
+        if (extension_loaded('swow') && class_exists(\GearDev\Swow\CoManager\SwowCoManager::class)) {
+            return \GearDev\Swow\CoManager\SwowCoManager::getInstance();
         }
-        throw new \Exception('Unknown gear.coroutines.extension name. Can be in: [swow]');
+        throw new \Exception('No co manager implementation found');
     }
 }

@@ -3,23 +3,14 @@
 namespace GearDev\Coroutines\Co;
 
 use GearDev\Coroutines\Interfaces\ChannelInterface;
-use GearDev\Swow\Channel\SwowChannel;
 
 class ChannelFactory
 {
     public static function createChannel(int $size = 0): ChannelInterface
     {
-        $extensionName = config('gear.coroutines.extension', 'swow');
-        if ($extensionName === 'swow') {
-            if (!extension_loaded('swow')) {
-                throw new \Exception('Extension "swow" not loaded');
-            }
-            if (class_exists(SwowChannel::class)) {
-                return new SwowChannel($size);
-            } else {
-                throw new \Exception('Class GearDev\Swow\Channel\SwowChannel not found');
-            }
+        if (extension_loaded('swow') && class_exists(\GearDev\Swow\Channel\SwowChannel::class)) {
+            return new \GearDev\Swow\Channel\SwowChannel($size);
         }
-        throw new \Exception('Unknown gear.coroutines.extension name. Can be in: [swow]');
+        throw new \Exception('No channel implementation found');
     }
 }
